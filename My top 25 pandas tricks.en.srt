@@ -1,0 +1,1668 @@
+1
+00:00:00,089 --> 00:00:02,570
+Hey everyone, this is Kevin from Data School.
+
+2
+00:00:02,570 --> 00:00:06,870
+Today you're going to learn my top 25 pandas
+tricks.
+
+3
+00:00:06,870 --> 00:00:11,190
+These are the best tricks I've learned from
+5 years of teaching pandas.
+
+4
+00:00:11,190 --> 00:00:17,640
+These tricks will help you to work faster, write better
+code, and impress your friends.
+
+5
+00:00:17,640 --> 00:00:20,510
+Here's everything you're going to learn.
+
+6
+00:00:20,510 --> 00:00:25,480
+There's also a bonus at the end of this video
+that you're not going to want to miss!
+
+7
+00:00:25,480 --> 00:00:29,480
+Before we start, I'm going to import pandas
+and NumPy.
+
+8
+00:00:29,480 --> 00:00:34,579
+I'm also going to read in some datasets that
+we'll be using as examples.
+
+9
+00:00:34,579 --> 00:00:39,649
+I'll be moving quickly, but you can download
+this notebook from the link in the description
+
+10
+00:00:39,649 --> 00:00:42,309
+below if you want to follow along.
+
+11
+00:00:42,309 --> 00:00:43,420
+Let's get going!
+
+12
+00:00:43,420 --> 00:00:44,450
+Trick number 1.
+
+13
+00:00:44,450 --> 00:00:47,440
+Show installed versions.
+
+14
+00:00:47,440 --> 00:00:51,460
+Sometimes you need to know the pandas version
+you're using, especially when reading the
+
+15
+00:00:51,460 --> 00:00:53,420
+pandas documentation.
+
+16
+00:00:53,420 --> 00:01:00,100
+You can show the pandas version by typing
+pd dot underscore underscore version underscore
+
+17
+00:01:00,100 --> 00:01:02,350
+underscore.
+
+18
+00:01:02,350 --> 00:01:08,999
+But if you also need to know the versions
+of pandas' dependencies, you can use the show_versions
+
+19
+00:01:08,999 --> 00:01:10,509
+function.
+
+20
+00:01:10,509 --> 00:01:17,880
+You can see the versions of Python, pandas,
+NumPy, matplotlib, and more.
+
+21
+00:01:17,880 --> 00:01:20,319
+Thanks to Harvey Summers for this trick.
+
+22
+00:01:20,319 --> 00:01:21,810
+Trick number 2.
+
+23
+00:01:21,810 --> 00:01:24,340
+Create an example DataFrame.
+
+24
+00:01:24,340 --> 00:01:27,109
+Let's say that you want to demonstrate some
+pandas code.
+
+25
+00:01:27,109 --> 00:01:29,669
+You need an example DataFrame to work with.
+
+26
+00:01:29,669 --> 00:01:35,249
+There are many ways to do this, but my favorite
+way is to pass a dictionary to the DataFrame
+
+27
+00:01:35,249 --> 00:01:41,259
+constructor, in which the dictionary keys
+are the column names and the dictionary values
+
+28
+00:01:41,259 --> 00:01:44,899
+are lists of column values.
+
+29
+00:01:44,899 --> 00:01:51,499
+Now if you need a much larger DataFrame, the
+above method will require way too much typing.
+
+30
+00:01:51,499 --> 00:01:58,719
+In that case, you can use NumPy's random.rand
+function, tell it the number of rows and columns,
+
+31
+00:01:58,719 --> 00:02:03,270
+and pass that to the DataFrame constructor.
+
+32
+00:02:03,270 --> 00:02:09,849
+That's pretty good, but if you also want non-numeric
+column names, you can coerce a string of letters
+
+33
+00:02:09,849 --> 00:02:15,599
+to a list and then pass that list to the columns
+parameter.
+
+34
+00:02:15,599 --> 00:02:20,020
+As you might guess, your string will need
+to have the same number of characters as there
+
+35
+00:02:20,020 --> 00:02:22,159
+are columns.
+
+36
+00:02:22,159 --> 00:02:23,610
+Trick number 3.
+
+37
+00:02:23,610 --> 00:02:25,510
+Rename columns.
+
+38
+00:02:25,510 --> 00:02:29,920
+Let's take a look at the example DataFrame
+we created in the last trick.
+
+39
+00:02:29,920 --> 00:02:36,150
+I prefer to use dot notation to select pandas
+columns, but that won't work since the column
+
+40
+00:02:36,150 --> 00:02:38,319
+names have spaces.
+
+41
+00:02:38,319 --> 00:02:39,870
+Let's fix this.
+
+42
+00:02:39,870 --> 00:02:44,840
+The most flexible method for renaming columns
+is the rename method.
+
+43
+00:02:44,840 --> 00:02:50,400
+You pass it a dictionary in which the keys
+are the old names and the values are the new
+
+44
+00:02:50,400 --> 00:02:54,459
+names, and you also specify the axis.
+
+45
+00:02:54,459 --> 00:02:59,590
+The best thing about this method is that you
+can use it to rename any number of columns,
+
+46
+00:02:59,590 --> 00:03:03,550
+whether it be just one column or all columns.
+
+47
+00:03:03,550 --> 00:03:09,049
+Now if you're going to rename all of the columns
+at once, a simpler method is just to overwrite
+
+48
+00:03:09,049 --> 00:03:12,790
+the columns attribute of the DataFrame.
+
+49
+00:03:12,790 --> 00:03:18,579
+Now if the only thing you're doing is replacing
+spaces with underscores, an even better method
+
+50
+00:03:18,579 --> 00:03:25,900
+is to use the str.replace method, since you
+don't have to type out all of the column names.
+
+51
+00:03:25,900 --> 00:03:30,930
+All three of these methods have the same result,
+which is to rename the columns so that they
+
+52
+00:03:30,930 --> 00:03:33,829
+don't have any spaces.
+
+53
+00:03:33,829 --> 00:03:40,469
+Finally, if you just need to add a prefix
+or suffix to all of your column names, you
+
+54
+00:03:40,469 --> 00:03:47,959
+can use the add_prefix method or the add_suffix
+method.
+
+55
+00:03:47,959 --> 00:03:49,269
+Trick number 4.
+
+56
+00:03:49,269 --> 00:03:51,209
+Reverse row order.
+
+57
+00:03:51,209 --> 00:03:54,450
+Let's take a look at the drinks DataFrame.
+
+58
+00:03:54,450 --> 00:03:59,349
+This is a dataset of average alcohol consumption
+by country.
+
+59
+00:03:59,349 --> 00:04:03,120
+What if you wanted to reverse the order of
+the rows?
+
+60
+00:04:03,120 --> 00:04:09,330
+The most straightforward method is to use
+the loc accessor and pass it colon colon negative
+
+61
+00:04:09,330 --> 00:04:16,820
+one, which is the same slicing notation used
+to reverse a Python list.
+
+62
+00:04:16,820 --> 00:04:21,780
+What if you also wanted to reset the index
+so that it starts at zero?
+
+63
+00:04:21,780 --> 00:04:28,240
+You would use the reset_index method and tell
+it to drop the old index entirely.
+
+64
+00:04:28,240 --> 00:04:34,020
+As you can see, the rows are in reverse order
+but the index has been reset to the default
+
+65
+00:04:34,020 --> 00:04:36,669
+integer index.
+
+66
+00:04:36,669 --> 00:04:37,949
+Trick number 5.
+
+67
+00:04:37,949 --> 00:04:39,970
+Reverse column order.
+
+68
+00:04:39,970 --> 00:04:45,040
+Similar to the previous trick, you can also
+use loc to reverse the left-to-right order
+
+69
+00:04:45,040 --> 00:04:47,380
+of your columns.
+
+70
+00:04:47,380 --> 00:04:54,410
+The colon before the comma means "select all
+rows", and the colon colon negative one after
+
+71
+00:04:54,410 --> 00:05:01,729
+the comma means "reverse the columns", which
+is why "country" is now on the right side.
+
+72
+00:05:01,729 --> 00:05:03,199
+Trick number 6.
+
+73
+00:05:03,199 --> 00:05:05,639
+Select columns by data type.
+
+74
+00:05:05,639 --> 00:05:09,010
+Here are the data types of the drinks DataFrame.
+
+75
+00:05:09,010 --> 00:05:12,720
+Let's say you need to select only the numeric
+columns.
+
+76
+00:05:12,720 --> 00:05:16,530
+You can use the select_dtypes method.
+
+77
+00:05:16,530 --> 00:05:20,530
+This includes both int and float columns.
+
+78
+00:05:20,530 --> 00:05:25,830
+You could also use this method to select just
+the object columns.
+
+79
+00:05:25,830 --> 00:05:31,720
+You can tell it to include multiple data types
+by passing a list.
+
+80
+00:05:31,720 --> 00:05:36,870
+You can also tell it to exclude certain data
+types.
+
+81
+00:05:36,870 --> 00:05:40,410
+Thanks to Vikram Lucky for this trick.
+
+82
+00:05:40,410 --> 00:05:41,919
+Trick number 7.
+
+83
+00:05:41,919 --> 00:05:44,040
+Convert strings to numbers.
+
+84
+00:05:44,040 --> 00:05:48,379
+Let's create another example DataFrame.
+
+85
+00:05:48,379 --> 00:05:54,720
+These numbers are actually stored as strings,
+which results in object columns.
+
+86
+00:05:54,720 --> 00:06:00,110
+In order to do mathematical operations on
+these columns, we need to convert the data
+
+87
+00:06:00,110 --> 00:06:01,580
+types to numeric.
+
+88
+00:06:01,580 --> 00:06:05,950
+You can use the astype method on the first
+two columns.
+
+89
+00:06:05,950 --> 00:06:11,490
+However, this would have resulted in an error
+if you tried to use it on the third column,
+
+90
+00:06:11,490 --> 00:06:17,030
+because that column contains a dash to represent
+zero and pandas doesn't understand how to
+
+91
+00:06:17,030 --> 00:06:18,280
+handle it.
+
+92
+00:06:18,280 --> 00:06:24,020
+Instead, you can use the to_numeric function
+on the third column and tell it to convert
+
+93
+00:06:24,020 --> 00:06:28,930
+any invalid input into NaN values.
+
+94
+00:06:28,930 --> 00:06:35,000
+If you know that the NaN values actually represent
+zeros, you can fill them with zeros using
+
+95
+00:06:35,000 --> 00:06:37,380
+the fillna method.
+
+96
+00:06:37,380 --> 00:06:43,199
+Finally, you can apply this function to the
+entire DataFrame all at once by using the
+
+97
+00:06:43,199 --> 00:06:45,479
+apply method.
+
+98
+00:06:45,479 --> 00:06:50,409
+This one line of code accomplishes our goal,
+because all of the data types have now been
+
+99
+00:06:50,409 --> 00:06:52,599
+converted to float.
+
+100
+00:06:52,599 --> 00:06:55,430
+Thanks to Chris Moffitt for this trick.
+
+101
+00:06:55,430 --> 00:06:56,699
+Trick number 8.
+
+102
+00:06:56,699 --> 00:06:58,760
+Reduce DataFrame size.
+
+103
+00:06:58,760 --> 00:07:03,820
+pandas DataFrames are designed to fit into
+memory, and so sometimes you need to reduce
+
+104
+00:07:03,820 --> 00:07:08,430
+the DataFrame size in order to work with it
+on your system.
+
+105
+00:07:08,430 --> 00:07:10,860
+Here's the size of the drinks DataFrame.
+
+106
+00:07:10,860 --> 00:07:15,720
+You can see that it currently uses 30.4 KB.
+
+107
+00:07:15,720 --> 00:07:19,850
+If you're having performance problems with
+your DataFrame, or you can't even read it
+
+108
+00:07:19,850 --> 00:07:25,599
+into memory, there are two easy steps you
+can take during the file reading process to
+
+109
+00:07:25,599 --> 00:07:28,530
+reduce the DataFrame size.
+
+110
+00:07:28,530 --> 00:07:34,300
+The first step is to only read in the columns
+that you actually need, which we specify with
+
+111
+00:07:34,300 --> 00:07:38,319
+the "usecols" parameter.
+
+112
+00:07:38,319 --> 00:07:45,440
+By only reading in these two columns, we've
+reduced the DataFrame size to 13.6 KB.
+
+113
+00:07:45,440 --> 00:07:51,629
+The second step is to convert any object columns
+containing categorical data to the category
+
+114
+00:07:51,629 --> 00:07:56,370
+data type, which we specify with the dtype
+parameter.
+
+115
+00:07:56,370 --> 00:08:00,970
+By reading in the continent column as the
+category data type, we've further reduced
+
+116
+00:08:00,970 --> 00:08:05,260
+the DataFrame size to 2.3 KB.
+
+117
+00:08:05,260 --> 00:08:10,770
+Keep in mind that the category data type will
+only reduce memory usage if you have a small
+
+118
+00:08:10,770 --> 00:08:15,340
+number of categories relative to the number
+of rows.
+
+119
+00:08:15,340 --> 00:08:16,469
+Trick number 9.
+
+120
+00:08:16,469 --> 00:08:20,979
+Build a DataFrame from multiple files row-wise.
+
+121
+00:08:20,979 --> 00:08:25,469
+Let's say that your dataset is spread across
+multiple files, but you want to read the dataset
+
+122
+00:08:25,469 --> 00:08:28,129
+into a single DataFrame.
+
+123
+00:08:28,129 --> 00:08:33,860
+For example, I have a small dataset of stock
+data in which each CSV file only includes
+
+124
+00:08:33,860 --> 00:08:35,170
+a single day.
+
+125
+00:08:35,170 --> 00:08:38,390
+Here's the first day.
+
+126
+00:08:38,390 --> 00:08:41,390
+Here's the second day.
+
+127
+00:08:41,390 --> 00:08:43,470
+And here's the third day.
+
+128
+00:08:43,470 --> 00:08:48,780
+You could read each CSV file into its own
+DataFrame, combine them together, and then
+
+129
+00:08:48,780 --> 00:08:53,690
+delete the original DataFrames, but that would
+be memory inefficient and require a lot of
+
+130
+00:08:53,690 --> 00:08:54,690
+code.
+
+131
+00:08:54,690 --> 00:09:00,420
+A better solution is to use the built-in glob
+module.
+
+132
+00:09:00,420 --> 00:09:05,280
+You can pass a pattern to glob, including
+wildcard characters, and it will return a
+
+133
+00:09:05,280 --> 00:09:09,020
+list of all files that match that pattern.
+
+134
+00:09:09,020 --> 00:09:14,890
+In this case, glob is looking in the "data"
+subdirectory for all CSV files that start
+
+135
+00:09:14,890 --> 00:09:18,630
+with the word "stocks".
+
+136
+00:09:18,630 --> 00:09:24,910
+glob returns filenames in an arbitrary order,
+which is why we sorted the list using Python's
+
+137
+00:09:24,910 --> 00:09:27,780
+built-in sorted function.
+
+138
+00:09:27,780 --> 00:09:34,000
+We can then use a generator expression to
+read each of the files using read_csv and
+
+139
+00:09:34,000 --> 00:09:41,490
+pass the results to the concat function, which
+will concatenate the rows into a single DataFrame.
+
+140
+00:09:41,490 --> 00:09:46,440
+Unfortunately, there are now duplicate values
+in the index.
+
+141
+00:09:46,440 --> 00:09:52,480
+To avoid that, we can tell the concat function
+to ignore the index and instead use the default
+
+142
+00:09:52,480 --> 00:09:57,160
+integer index.
+
+143
+00:09:57,160 --> 00:10:00,850
+Thanks to Dinesh Nair and Davis Vickers for
+this trick.
+
+144
+00:10:00,850 --> 00:10:02,020
+Trick number 10.
+
+145
+00:10:02,020 --> 00:10:06,420
+Build a DataFrame from multiple files column-wise.
+
+146
+00:10:06,420 --> 00:10:11,260
+The previous trick is useful when each file
+contains rows from your dataset.
+
+147
+00:10:11,260 --> 00:10:16,000
+But what if each file instead contains columns
+from your dataset?
+
+148
+00:10:16,000 --> 00:10:21,480
+Here's an example in which the drinks dataset
+has been split into two CSV files, and each
+
+149
+00:10:21,480 --> 00:10:28,590
+file contains three columns.
+
+150
+00:10:28,590 --> 00:10:33,890
+Similar to the previous trick, we'll start
+by using glob.
+
+151
+00:10:33,890 --> 00:10:42,140
+And this time, we'll tell the concat function
+to concatenate along the columns axis.
+
+152
+00:10:42,140 --> 00:10:45,410
+Now our DataFrame has all six columns.
+
+153
+00:10:45,410 --> 00:10:46,950
+Trick number 11.
+
+154
+00:10:46,950 --> 00:10:49,960
+Create a DataFrame from the clipboard.
+
+155
+00:10:49,960 --> 00:10:54,971
+Let's say that you have some data stored in
+an Excel spreadsheet or a Google Sheet, and
+
+156
+00:10:54,971 --> 00:10:58,810
+you want to get it into a DataFrame as quickly
+as possible.
+
+157
+00:10:58,810 --> 00:11:04,730
+Just select the data and copy it to the clipboard.
+
+158
+00:11:04,730 --> 00:11:13,350
+Then, you can use the read_clipboard function
+to read it into a DataFrame.
+
+159
+00:11:13,350 --> 00:11:18,771
+Just like the read_csv function, read_clipboard
+automatically detects the correct data type
+
+160
+00:11:18,771 --> 00:11:21,170
+for each column.
+
+161
+00:11:21,170 --> 00:11:29,060
+Let's copy one other dataset to the clipboard.
+
+162
+00:11:29,060 --> 00:11:39,350
+Amazingly, pandas has even identified the
+first column as the index.
+
+163
+00:11:39,350 --> 00:11:44,290
+Keep in mind that if you want your work to
+be reproducible in the future, read_clipboard
+
+164
+00:11:44,290 --> 00:11:46,950
+is not the recommended approach.
+
+165
+00:11:46,950 --> 00:11:50,680
+Thanks to Priyaranjan Mohanty for this trick.
+
+166
+00:11:50,680 --> 00:11:52,130
+Trick number 12.
+
+167
+00:11:52,130 --> 00:11:56,050
+Split a DataFrame into two random subsets.
+
+168
+00:11:56,050 --> 00:12:01,490
+Let's say that you want to split a DataFrame
+into two parts, randomly assigning 75% of
+
+169
+00:12:01,490 --> 00:12:07,490
+the rows to one DataFrame and the other 25%
+to a second DataFrame.
+
+170
+00:12:07,490 --> 00:12:14,800
+For example, we have a DataFrame of movie
+ratings with 979 rows.
+
+171
+00:12:14,800 --> 00:12:23,700
+We can use the sample method to randomly select
+75% of the rows and assign them to the "movies_1"
+
+172
+00:12:23,700 --> 00:12:25,740
+DataFrame.
+
+173
+00:12:25,740 --> 00:12:32,360
+Then we can use the drop method to drop all
+rows that are in "movies_1" and assign the
+
+174
+00:12:32,360 --> 00:12:36,670
+remaining rows to "movies_2".
+
+175
+00:12:36,670 --> 00:12:41,310
+You can see that the total number of rows
+is correct.
+
+176
+00:12:41,310 --> 00:12:50,820
+And you can see from the index that every
+movie is in either "movies_1" or "movies_2".
+
+177
+00:12:50,820 --> 00:12:57,110
+Keep in mind that this approach will not work
+if your index values are not unique.
+
+178
+00:12:57,110 --> 00:12:58,560
+Trick number 13.
+
+179
+00:12:58,560 --> 00:13:01,880
+Filter a DataFrame by multiple categories.
+
+180
+00:13:01,880 --> 00:13:05,500
+Let's take a look at the movies DataFrame.
+
+181
+00:13:05,500 --> 00:13:09,760
+One of the columns is genre.
+
+182
+00:13:09,760 --> 00:13:17,060
+If we wanted to filter the DataFrame to only
+show movies with the genre Action or Drama
+
+183
+00:13:17,060 --> 00:13:24,960
+or Western, we could use multiple conditions
+separated by the "or" operator.
+
+184
+00:13:24,960 --> 00:13:31,610
+However, you can actually rewrite this code
+more clearly by using the isin method and
+
+185
+00:13:31,610 --> 00:13:35,860
+passing it a list of genres.
+
+186
+00:13:35,860 --> 00:13:40,940
+And if you want to reverse this filter, so
+that you are excluding rather than including
+
+187
+00:13:40,940 --> 00:13:47,980
+those three genres, you can put a tilde in
+front of the condition.
+
+188
+00:13:47,980 --> 00:13:52,640
+This works because tilde is the "not" operator
+in Python.
+
+189
+00:13:52,640 --> 00:13:54,320
+Trick number 14.
+
+190
+00:13:54,320 --> 00:13:58,040
+Filter a DataFrame by largest categories.
+
+191
+00:13:58,040 --> 00:14:03,800
+Let's say that you needed to filter the movies
+DataFrame by genre, but only include the 3
+
+192
+00:14:03,800 --> 00:14:05,670
+largest genres.
+
+193
+00:14:05,670 --> 00:14:11,850
+We'll start by taking the value_counts of
+genre and saving it as a Series called counts.
+
+194
+00:14:11,850 --> 00:14:20,690
+The Series method nlargest makes it easy to
+select the 3 largest values in this Series.
+
+195
+00:14:20,690 --> 00:14:25,390
+And all we actually need from this Series
+is the index.
+
+196
+00:14:25,390 --> 00:14:35,010
+Finally, we can pass the index object to isin,
+and it will be treated like a list of genres.
+
+197
+00:14:35,010 --> 00:14:42,450
+Thus, only Drama and Comedy and Action movies
+remain in the DataFrame.
+
+198
+00:14:42,450 --> 00:14:44,060
+Trick number 15.
+
+199
+00:14:44,060 --> 00:14:46,270
+Handle missing values.
+
+200
+00:14:46,270 --> 00:14:50,550
+Let's look at a dataset of UFO sightings.
+
+201
+00:14:50,550 --> 00:14:53,960
+You'll notice that some of the values are
+missing.
+
+202
+00:14:53,960 --> 00:14:59,460
+To find out how many values are missing in
+each column, you can use the isna method and
+
+203
+00:14:59,460 --> 00:15:00,750
+then take the sum.
+
+204
+00:15:00,750 --> 00:15:07,930
+isna generated a DataFrame of True and False
+values, and sum converted all of the True
+
+205
+00:15:07,930 --> 00:15:11,330
+values to 1 and added them up.
+
+206
+00:15:11,330 --> 00:15:16,880
+Similarly, you can find out the percentage
+of values that are missing by taking the mean
+
+207
+00:15:16,880 --> 00:15:20,370
+of isna.
+
+208
+00:15:20,370 --> 00:15:26,650
+If you want to drop the columns that have
+any missing values, you can use the dropna
+
+209
+00:15:26,650 --> 00:15:28,460
+method.
+
+210
+00:15:28,460 --> 00:15:33,550
+Or if you want to drop columns in which more
+than 10% of the values are missing, you can
+
+211
+00:15:33,550 --> 00:15:38,120
+set a threshold for dropna.
+
+212
+00:15:38,120 --> 00:15:45,940
+len of ufo returns the total number of rows,
+and then we multiply that by 0.9 to tell pandas
+
+213
+00:15:45,940 --> 00:15:52,270
+to only keep columns in which at least 90%
+of the values are not missing.
+
+214
+00:15:52,270 --> 00:15:57,290
+Thanks to Ratan Rohith and Joanes Madinabeitia
+for this trick.
+
+215
+00:15:57,290 --> 00:15:59,080
+Trick number 16.
+
+216
+00:15:59,080 --> 00:16:01,890
+Split a string into multiple columns.
+
+217
+00:16:01,890 --> 00:16:05,010
+Let's create another example DataFrame.
+
+218
+00:16:05,010 --> 00:16:10,480
+What if we wanted to split the "name" column
+into three separate columns, for first, middle,
+
+219
+00:16:10,480 --> 00:16:11,890
+and last name?
+
+220
+00:16:11,890 --> 00:16:18,550
+We would use the str.split method and tell
+it to split on a space character and expand
+
+221
+00:16:18,550 --> 00:16:21,580
+the results into a DataFrame.
+
+222
+00:16:21,580 --> 00:16:27,250
+These three columns can actually be saved
+to the original DataFrame in a single assignment
+
+223
+00:16:27,250 --> 00:16:32,240
+statement.
+
+224
+00:16:32,240 --> 00:16:37,780
+What if we wanted to split a string, but only
+keep one of the resulting columns?
+
+225
+00:16:37,780 --> 00:16:44,250
+For example, let's split the location column
+on "comma space".
+
+226
+00:16:44,250 --> 00:16:50,420
+If we only cared about saving the city name
+in column 0, we can just select that column
+
+227
+00:16:50,420 --> 00:16:55,200
+and save it to the DataFrame.
+
+228
+00:16:55,200 --> 00:16:59,670
+Thanks to Daniel Kim and Emmanuel Ameisen
+for this trick.
+
+229
+00:16:59,670 --> 00:17:00,800
+Trick number 17.
+
+230
+00:17:00,800 --> 00:17:05,430
+Expand a Series of lists into a DataFrame.
+
+231
+00:17:05,430 --> 00:17:09,110
+Let's create another example DataFrame.
+
+232
+00:17:09,110 --> 00:17:15,610
+There are two columns, and the second column
+contains regular Python lists of integers.
+
+233
+00:17:15,610 --> 00:17:22,019
+If we wanted to expand the second column into
+its own DataFrame, we can use the apply method
+
+234
+00:17:22,019 --> 00:17:27,270
+on that column and pass it the Series constructor.
+
+235
+00:17:27,270 --> 00:17:34,610
+And by using the concat function, you can
+combine the original DataFrame with the new
+
+236
+00:17:34,610 --> 00:17:39,710
+DataFrame.
+
+237
+00:17:39,710 --> 00:17:41,429
+Trick number 18.
+
+238
+00:17:41,429 --> 00:17:43,570
+Aggregate by multiple functions.
+
+239
+00:17:43,570 --> 00:17:48,110
+Let's look at a DataFrame of orders from the
+Chipotle restaurant chain.
+
+240
+00:17:48,110 --> 00:17:53,139
+Each order has an order_id and consists of
+one or more rows.
+
+241
+00:17:53,139 --> 00:18:00,630
+To figure out the total price of an order,
+you sum the item_price for that order_id.
+
+242
+00:18:00,630 --> 00:18:06,539
+For example, here's the total price of order
+number 1.
+
+243
+00:18:06,539 --> 00:18:12,570
+If you wanted to calculate the total price
+of every order, you would groupby order_id
+
+244
+00:18:12,570 --> 00:18:17,970
+and then take the sum of item_price for each
+group.
+
+245
+00:18:17,970 --> 00:18:25,260
+However, you're not actually limited to aggregating
+by a single function such as sum.
+
+246
+00:18:25,260 --> 00:18:31,559
+To aggregate by multiple functions, you use
+the agg method and pass it a list of functions
+
+247
+00:18:31,559 --> 00:18:34,039
+such as sum and count.
+
+248
+00:18:34,039 --> 00:18:42,059
+That gives us the total price of each order
+as well as the number of items in each order.
+
+249
+00:18:42,059 --> 00:18:44,050
+Trick number 19.
+
+250
+00:18:44,050 --> 00:18:47,970
+Combine the output of an aggregation with
+a DataFrame.
+
+251
+00:18:47,970 --> 00:18:52,029
+Let's take another look at the orders DataFrame.
+
+252
+00:18:52,029 --> 00:18:57,809
+What if we wanted to create a new column listing
+the total price of each order?
+
+253
+00:18:57,809 --> 00:19:03,240
+Recall that we calculated the total price
+using the sum method.
+
+254
+00:19:03,240 --> 00:19:09,380
+sum is an aggregation function, which means
+that it returns a reduced version of the input
+
+255
+00:19:09,380 --> 00:19:10,509
+data.
+
+256
+00:19:10,509 --> 00:19:18,570
+In other words, the output of the sum function
+is smaller than the input to the function.
+
+257
+00:19:18,570 --> 00:19:24,809
+The solution is to use the transform method,
+which performs the same calculation but returns
+
+258
+00:19:24,809 --> 00:19:30,600
+output data that is the same shape as the
+input data.
+
+259
+00:19:30,600 --> 00:19:37,730
+We'll store the results in a new DataFrame
+column called total_price.
+
+260
+00:19:37,730 --> 00:19:44,330
+As you can see, the total price of each order
+is now listed on every single line.
+
+261
+00:19:44,330 --> 00:19:53,879
+That makes it easy to calculate the percentage
+of the total order price that each line represents.
+
+262
+00:19:53,879 --> 00:19:56,850
+Thanks to Chris Moffitt for this trick.
+
+263
+00:19:56,850 --> 00:19:58,399
+Trick number 20.
+
+264
+00:19:58,399 --> 00:20:01,570
+Select a slice of rows and columns.
+
+265
+00:20:01,570 --> 00:20:04,970
+Let's take a look at another dataset.
+
+266
+00:20:04,970 --> 00:20:10,160
+This is the famous Titanic dataset, which
+shows information about passengers on the
+
+267
+00:20:10,160 --> 00:20:13,940
+Titanic and whether or not they survived.
+
+268
+00:20:13,940 --> 00:20:19,399
+If you wanted a numerical summary of the dataset,
+you would use the describe method.
+
+269
+00:20:19,399 --> 00:20:25,610
+However, the resulting DataFrame might be
+displaying more information than you need.
+
+270
+00:20:25,610 --> 00:20:31,320
+If you wanted to filter it to only show the
+"five-number summary", you can use the loc
+
+271
+00:20:31,320 --> 00:20:40,000
+accessor and pass it a slice of the "min"
+through the "max" row labels.
+
+272
+00:20:40,000 --> 00:20:45,480
+And if you're not interested in all of the
+columns, you can also pass it a slice of column
+
+273
+00:20:45,480 --> 00:20:48,260
+labels.
+
+274
+00:20:48,260 --> 00:20:52,509
+Thanks to Alexandru Mircea for this trick.
+
+275
+00:20:52,509 --> 00:20:54,299
+Trick number 21.
+
+276
+00:20:54,299 --> 00:20:57,179
+Reshape a MultiIndexed Series.
+
+277
+00:20:57,179 --> 00:21:03,140
+The Titanic dataset has a "Survived" column
+made up of ones and zeros, so you can calculate
+
+278
+00:21:03,140 --> 00:21:09,539
+the overall survival rate by taking a mean
+of that column.
+
+279
+00:21:09,539 --> 00:21:15,710
+If you wanted to calculate the survival rate
+by a single category such as "Sex", you would
+
+280
+00:21:15,710 --> 00:21:17,519
+use a groupby.
+
+281
+00:21:17,519 --> 00:21:22,970
+And if you wanted to calculate the survival
+rate across two different categories at once,
+
+282
+00:21:22,970 --> 00:21:27,100
+you would groupby both of those categories.
+
+283
+00:21:27,100 --> 00:21:32,220
+This shows the survival rate for every combination
+of Sex and Passenger Class.
+
+284
+00:21:32,220 --> 00:21:38,799
+It's stored as a MultiIndexed Series, meaning
+that it has multiple index levels to the left
+
+285
+00:21:38,799 --> 00:21:41,409
+of the actual data.
+
+286
+00:21:41,409 --> 00:21:46,779
+It can be hard to read and interact with data
+in this format, so it's often more convenient
+
+287
+00:21:46,779 --> 00:21:53,480
+to reshape a MultiIndexed Series into a DataFrame
+by using the unstack method.
+
+288
+00:21:53,480 --> 00:21:59,360
+This DataFrame contains the same exact data
+as the MultiIndexed Series, except that now
+
+289
+00:21:59,360 --> 00:22:04,340
+you can interact with it using familiar DataFrame
+methods.
+
+290
+00:22:04,340 --> 00:22:05,970
+Trick number 22.
+
+291
+00:22:05,970 --> 00:22:08,049
+Create a pivot table.
+
+292
+00:22:08,049 --> 00:22:13,120
+If you often create DataFrames like the one
+above, you might find it more convenient to
+
+293
+00:22:13,120 --> 00:22:17,539
+use the pivot_table method instead.
+
+294
+00:22:17,539 --> 00:22:25,090
+With a pivot table, you directly specify the
+index, the columns, the values, and the aggregation
+
+295
+00:22:25,090 --> 00:22:26,929
+function.
+
+296
+00:22:26,929 --> 00:22:32,540
+An added benefit of a pivot table is that
+you can easily add row and column totals by
+
+297
+00:22:32,540 --> 00:22:37,160
+setting margins=True.
+
+298
+00:22:37,160 --> 00:22:42,590
+This shows the overall survival rate as well
+as the survival rate by Sex and Passenger
+
+299
+00:22:42,590 --> 00:22:43,929
+Class.
+
+300
+00:22:43,929 --> 00:22:49,999
+Finally, you can create a cross-tabulation
+just by changing the aggregation function
+
+301
+00:22:49,999 --> 00:22:54,789
+from "mean" to "count".
+
+302
+00:22:54,789 --> 00:23:01,240
+This shows the number of records that appear
+in each combination of categories.
+
+303
+00:23:01,240 --> 00:23:02,980
+Trick number 23.
+
+304
+00:23:02,980 --> 00:23:07,149
+Convert continuous data into categorical data.
+
+305
+00:23:07,149 --> 00:23:11,909
+Let's take a look at the Age column from the
+Titanic dataset.
+
+306
+00:23:11,909 --> 00:23:17,000
+It's currently continuous data, but what if
+you wanted to convert it into categorical
+
+307
+00:23:17,000 --> 00:23:18,730
+data?
+
+308
+00:23:18,730 --> 00:23:25,720
+One solution would be to label the age ranges,
+such as "child", "young adult", and "adult".
+
+309
+00:23:25,720 --> 00:23:29,950
+The best way to do this is by using the cut
+function.
+
+310
+00:23:29,950 --> 00:23:33,480
+This assigned each value to a bin with a label.
+
+311
+00:23:33,480 --> 00:23:40,950
+Ages 0 to 18 were assigned the label "child",
+ages 18 to 25 were assigned the label "young
+
+312
+00:23:40,950 --> 00:23:46,980
+adult", and ages 25 to 99 were assigned the
+label "adult".
+
+313
+00:23:46,980 --> 00:23:53,360
+Notice that the data type is now "category",
+and the categories are automatically ordered.
+
+314
+00:23:53,360 --> 00:23:56,119
+Thanks to Rafi Islam for this trick.
+
+315
+00:23:56,119 --> 00:23:57,820
+Trick number 24.
+
+316
+00:23:57,820 --> 00:24:00,119
+Change display options.
+
+317
+00:24:00,119 --> 00:24:04,200
+Let's take another look at the Titanic dataset.
+
+318
+00:24:04,200 --> 00:24:10,539
+Notice that the Age column has 1 decimal place
+and the Fare column has 4 decimal places.
+
+319
+00:24:10,539 --> 00:24:15,360
+What if you wanted to standardize the display
+to use 2 decimal places?
+
+320
+00:24:15,360 --> 00:24:18,639
+You can use the set_option function.
+
+321
+00:24:18,639 --> 00:24:23,740
+The first argument is the name of the option,
+and the second argument is a Python format
+
+322
+00:24:23,740 --> 00:24:26,120
+string.
+
+323
+00:24:26,120 --> 00:24:30,880
+You can see that Age and Fare are now using
+2 decimal places.
+
+324
+00:24:30,880 --> 00:24:36,450
+Note that this did not change the underlying
+data, only the display of the data.
+
+325
+00:24:36,450 --> 00:24:41,429
+You can also reset any option back to its
+default.
+
+326
+00:24:41,429 --> 00:24:45,679
+There are many more options you can specify
+is a similar way.
+
+327
+00:24:45,679 --> 00:24:47,750
+Thanks to Jeff Hale for this trick.
+
+328
+00:24:47,750 --> 00:24:49,539
+Trick number 25.
+
+329
+00:24:49,539 --> 00:24:51,269
+Style a DataFrame.
+
+330
+00:24:51,269 --> 00:24:56,220
+The previous trick is useful if you want to
+change the display of your entire notebook.
+
+331
+00:24:56,220 --> 00:25:04,190
+However, a more flexible and powerful approach
+is to define the style of a particular DataFrame.
+
+332
+00:25:04,190 --> 00:25:06,429
+Let's return to the stocks DataFrame.
+
+333
+00:25:06,429 --> 00:25:14,679
+We can create a dictionary of format strings
+that specifies how each column should be formatted.
+
+334
+00:25:14,679 --> 00:25:21,409
+And then we can pass it to the DataFrame's
+style.format method.
+
+335
+00:25:21,409 --> 00:25:26,990
+Notice that the Date is now in month-day-year
+format, the closing price has a dollar sign,
+
+336
+00:25:26,990 --> 00:25:29,690
+and the Volume has commas.
+
+337
+00:25:29,690 --> 00:25:36,110
+We can apply more styling by chaining additional
+methods.
+
+338
+00:25:36,110 --> 00:25:41,509
+We've now hidden the index, highlighted the
+minimum Close value in red, and highlighted
+
+339
+00:25:41,509 --> 00:25:45,549
+the maximum Close value in green.
+
+340
+00:25:45,549 --> 00:25:49,659
+Here's another example of DataFrame styling.
+
+341
+00:25:49,659 --> 00:25:55,990
+The Volume column now has a background gradient
+to help you easily identify high and low values.
+
+342
+00:25:55,990 --> 00:26:01,070
+And here's one final example.
+
+343
+00:26:01,070 --> 00:26:07,509
+There's now a bar chart within the Volume
+column and a caption above the DataFrame.
+
+344
+00:26:07,509 --> 00:26:12,059
+Note that there are many more options for
+how you can style your DataFrame.
+
+345
+00:26:12,059 --> 00:26:14,539
+Thanks to Chris Moffitt for this trick.
+
+346
+00:26:14,539 --> 00:26:16,850
+Now for a bonus trick.
+
+347
+00:26:16,850 --> 00:26:19,009
+Profile a DataFrame.
+
+348
+00:26:19,009 --> 00:26:23,120
+Let's say that you've got a new dataset, and
+you want to quickly explore it without too
+
+349
+00:26:23,120 --> 00:26:24,639
+much work.
+
+350
+00:26:24,639 --> 00:26:30,450
+There's a separate package called pandas-profiling
+that is designed for this purpose.
+
+351
+00:26:30,450 --> 00:26:33,580
+First you have to install it using conda or
+pip.
+
+352
+00:26:33,580 --> 00:26:36,759
+Once that's done, you import pandas_profiling.
+
+353
+00:26:36,759 --> 00:26:44,299
+Then, simply run the ProfileReport function
+and pass it any DataFrame.
+
+354
+00:26:44,299 --> 00:26:47,999
+It returns an interactive HTML report.
+
+355
+00:26:47,999 --> 00:26:56,179
+The first section is an overview of the dataset
+and a list of possible issues with the data.
+
+356
+00:26:56,179 --> 00:26:59,929
+The next section gives a summary of each column.
+
+357
+00:26:59,929 --> 00:27:06,690
+You can click "toggle details" for even more
+information.
+
+358
+00:27:06,690 --> 00:27:12,330
+The third section shows a heatmap of the correlation
+between columns.
+
+359
+00:27:12,330 --> 00:27:16,350
+And the fourth section shows the head of the
+dataset.
+
+360
+00:27:16,350 --> 00:27:21,440
+Thanks to Siddhartha, Hamza Belhadj, and Subham
+Biswas for this trick.
+
+361
+00:27:21,440 --> 00:27:23,090
+Alright, it's your turn.
+
+362
+00:27:23,090 --> 00:27:27,039
+Let me know in the comments section below
+which one of these tricks you're most excited
+
+363
+00:27:27,039 --> 00:27:28,559
+to start using!
+
+364
+00:27:28,559 --> 00:27:32,710
+And if you have a favorite pandas trick that
+I did not mention, also let me know in the
+
+365
+00:27:32,710 --> 00:27:33,830
+comments.
+
+366
+00:27:33,830 --> 00:27:36,919
+Thank you so much for watching and I'll see
+you in the next video!
+
